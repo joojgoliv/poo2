@@ -1,9 +1,14 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class JanelaRevista {
 
     JFrame frame = new JFrame("Revistas");
+    ArrayList<Revistas> listaRevistas = new ArrayList<Revistas>();
+    Revistas revista;
 
     JanelaRevista(){
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -16,7 +21,7 @@ public class JanelaRevista {
         gbc.insets = new Insets(5, 5, 5, 5); // Espaçamento entre os componentes
 
         // Texto centralizado no topo
-        JLabel tituloLabel = new JLabel("Livros", SwingConstants.CENTER);
+        JLabel tituloLabel = new JLabel("Revista", SwingConstants.CENTER);
         tituloLabel.setFont(new Font("Arial", Font.BOLD, 16));
         gbc.gridx = 0;
         gbc.gridy = 0;
@@ -67,18 +72,42 @@ public class JanelaRevista {
 
     //painelk para botoes lado a lado
         JPanel painelBotoes = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 0));
-        JButton botaoSalvar = new JButton("Incluir");
-        JButton botaoCancelar = new JButton("Revistas");
-        JButton botaoLimpar = new JButton("Listagem");
+        JButton botaoIncluir = new JButton("Incluir");
+        JButton botaoRevista = new JButton("Livros");
+        JButton botaoListagem = new JButton("Listagem");
 
-        painelBotoes.add(botaoSalvar);
-        painelBotoes.add(botaoCancelar);
-        painelBotoes.add(botaoLimpar);
+        painelBotoes.add(botaoIncluir);
+        painelBotoes.add(botaoRevista);
+        painelBotoes.add(botaoListagem);
 
         gbc.gridx = 0;
         gbc.gridy = 4;
         gbc.gridwidth = 2;
         frame.add(painelBotoes, gbc);
+
+        //======CONFIG BOTOES=======//
+        botaoIncluir.addActionListener (new ActionListener() {
+            public void actionPerformed (ActionEvent e) {
+                String til = campoTitulo.getText();
+                String aut = campoAutor.getText();
+                String ano = campoAno.getText();
+                String vol = campovol.getText();
+                String nr = camponr.getText();
+
+                int volu = Integer.parseInt(vol.trim());
+                int anos = Integer.parseInt(ano.trim());
+                int num = Integer.parseInt(nr.trim());
+
+                revista = new Revistas (til, aut, volu, num, anos);
+                listaRevistas.add(revista);
+            }
+        });
+
+        botaoListagem.addActionListener (new ActionListener() {
+            public void actionPerformed (ActionEvent e) {
+                Listagem listagem = new Listagem(null, listaRevistas);
+            }
+        });
 
         // Exibindo a janela
         frame.setVisible(true);

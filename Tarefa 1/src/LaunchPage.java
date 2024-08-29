@@ -7,7 +7,6 @@ public class LaunchPage implements ActionListener {
     JButton livroButton = new JButton("Cadastrar Livro");
     JButton revistaButton = new JButton("Cadastrar Revista");
     LaunchPage(){
-
         revistaButton.setBounds(50,50,150,50);
         revistaButton.setFocusable(false);
         revistaButton.addActionListener(this);
@@ -23,7 +22,6 @@ public class LaunchPage implements ActionListener {
         frame.setLayout(null);
         frame.setVisible(true);
     }
-
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==livroButton){
