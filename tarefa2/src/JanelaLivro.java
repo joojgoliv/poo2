@@ -5,11 +5,10 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 
-public class JanelaLivro{
+public class JanelaLivro extends JFrame{
 
     JFrame frame = new JFrame("Livros");
     Livros livro;
-
     ArrayList<Livros> listaLivros = new ArrayList<Livros>();
 
     JanelaLivro(){
@@ -89,11 +88,14 @@ public class JanelaLivro{
 
                 livro = new Livros (til, aut, num);
                 listaLivros.add(livro);
+                campoAno .setText("");
+                campoAutor.setText("");
+                campoTitulo.setText("");
             }
         });
         botaoListagem.addActionListener (new ActionListener() {
             public void actionPerformed (ActionEvent e) {
-                Listagem listagem = new Listagem(listaLivros, null);
+                Listagem listagem = new Listagem(listaLivros, null, null);
             }
         });
 

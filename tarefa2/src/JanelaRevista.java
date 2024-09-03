@@ -4,11 +4,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-public class JanelaRevista {
+public class JanelaRevista extends JFrame{
 
     JFrame frame = new JFrame("Revistas");
-    ArrayList<Revistas> listaRevistas = new ArrayList<Revistas>();
     Revistas revista;
+    ArrayList<Revistas> listaRevistas = new ArrayList<Revistas>();
 
     JanelaRevista(){
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -100,12 +100,18 @@ public class JanelaRevista {
 
                 revista = new Revistas (til, aut, volu, num, anos);
                 listaRevistas.add(revista);
+                campoTitulo.setText("");
+                camponr.setText("");
+                campoAno .setText("");
+                campoAutor.setText("");
+                campoTitulo.setText("");
+                campovol.setText("");
             }
         });
 
         botaoListagem.addActionListener (new ActionListener() {
             public void actionPerformed (ActionEvent e) {
-                Listagem listagem = new Listagem(null, listaRevistas);
+                Listagem listagem = new Listagem(null, listaRevistas, null);
             }
         });
 

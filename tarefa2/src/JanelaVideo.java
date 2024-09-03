@@ -1,13 +1,14 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-public class JanelaVideo {
+public class JanelaVideo extends JFrame{
 
     JFrame frame = new JFrame("Filmes");
-    ArrayList<Video> listaVideos = new ArrayList<Video>();
     Video video;
-
+    ArrayList<Video> listaVideos = new ArrayList<Video>();
     JanelaVideo() {
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setSize(400, 400);
@@ -55,10 +56,14 @@ public class JanelaVideo {
         JTextField campoAno = new JTextField(3);
         JLabel gen = new JLabel("Genero:");
         JTextField campogen = new JTextField(3);
+        JLabel duracao = new JLabel("Duração:");
+        JTextField campoDuracao = new JTextField(3);
         AnoGen.add(ano);
         AnoGen.add(campoAno);
         AnoGen.add(gen);
         AnoGen.add(campogen);
+        AnoGen.add(duracao);
+        AnoGen.add(campoDuracao);
         gbc.gridx = 0;
         gbc.gridy = 3;
         gbc.gridwidth = 2;
@@ -79,7 +84,35 @@ public class JanelaVideo {
         gbc.gridwidth = 2;
         frame.add(painelBotoes, gbc);
 
+        botaoIncluir.addActionListener (new ActionListener() {
+            public void actionPerformed (ActionEvent e) {
+                String til = campoTitulo.getText();
+                String aut = campoAutor.getText();
+                String ano = campoAno.getText();
+                String gen = campogen.getText();
+                String dur = campoDuracao.getText();
 
+                int anos = Integer.parseInt(ano.trim()); //string to int para add abaixo
+                int duracao = Integer.parseInt(dur.trim());
+
+                video = new Video(til, aut, gen, duracao, anos);
+
+                listaVideos.add(video);
+                campoDuracao.setText("");
+                campogen.setText("");
+                campoAno .setText("");
+                campoAutor.setText("");
+                campoTitulo.setText("");
+            }
+
+        });
+
+
+        botaoListagem.addActionListener (new ActionListener() {
+            public void actionPerformed (ActionEvent e) {
+                Listagem listagem = new Listagem(null, null, listaVideos);
+            }
+        });
 
 
         frame.setVisible(true);
